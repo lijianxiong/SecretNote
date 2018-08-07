@@ -1,0 +1,123 @@
+<?php include VIEW_PATH.'public/header.html' ;?>
+
+<!-- Main container -->
+<main>
+    <div class="main-content">
+
+        <div class="media-list media-list-divided media-list-hover">
+            <div class="media-list-body row b-1">
+                <?php foreach($notepad_list as $item): ?>
+                <?php $id=$item['id'];?>
+                <div class="col-md-6 col-lg-6">
+                    <div class="card">
+                    <div class="media">
+                        <img class="avatar" src="<?=@$userinfo['face_url']?>" alt="<?=@$userinfo['nickname'] ? $userinfo['nickname'] :'无名';?>">
+                        <div class="media-body">
+                            <p class="float-left"><strong><?=@$userinfo['nickname'] ? $userinfo['nickname'] :'无名';?></strong></p>
+                            <ul class="card-controls">
+                                <li class="dropdown">
+                                    <a data-toggle="dropdown" href="#" aria-expanded="false"><i class="ti-more-alt rotate-90"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end">
+                                        <a class="dropdown-item editnote" href="#qv-form-center-edit" data-toggle="quickview" data-id="<?=$item['id']?>">
+                                            <i class="fa fa-fw fa-pencil-square-o"></i> 修改
+                                        </a>
+                                        <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','share','notepad','外链已经生成!','外链已经删除!')">
+                                            <i class="fa fa-fw fa-link"></i> 生成外链
+                                        </a>
+                                        <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','star','notepad','收藏便签成功!','收藏便签失败!')">
+                                            <i class="fa fa-fw fa-bookmark"></i> 收藏便签
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','del','notepad','便签删除成功!','便签删除失败!')">
+                                            <i class="fa fa-fw fa-trash-o"></i> 删除便签
+                                        </a>
+                                        <!--<a class="dropdown-item" href="#"><i class="ti-export"></i> Export</a>-->
+                                        <!--<a class="dropdown-item" href="#"><i class="ti-printer"></i> Print</a>-->
+
+                                        <!--<a class="dropdown-item" href="#"><i class="ti-settings"></i> Settings</a>-->
+                                    </div>
+                                </li>
+                            </ul>
+                            <p><?=@$item['content'];?></p>
+                            <p><span datetime="<?=@date('Y-m-d H:i:s' , $item['create_time']);?>"><i class="ti-time"></i> <?=@date('Y-m-d H:i:s' , $item['create_time']);?></span> / <?=$item['links'] != 1 ? '<a href="/opentwitter/'.$item['links'].'" target="_blank">'.$item['links'].'</a>' : '暂无外链' ?></p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <footer class="flexbox align-items-center py-20">
+                <span class="flex-grow text-right text-lighter pr-2"></span>
+                <nav>
+                    {$notepad_list->render()}
+                </nav>
+            </footer>
+        </div>
+
+
+    </div><!--/.main-content -->
+</main>
+
+<div class="fab fab-fixed">
+    <a class="btn btn-float btn-primary" href="#qv-form-center" title="新建便签" data-provide="tooltip" data-toggle="quickview"><i class="ti-plus"></i></a>
+</div>
+
+
+
+
+<!-- Quickview - Add product -->
+<div id="qv-form-center" class="quickview">
+    <header class="quickview-header">
+        <p class="quickview-title lead">新建便签</p>
+        <span class="close"><i class="ti-close"></i></span>
+    </header>
+
+    <div class="quickview-body center-v">
+        <form class="quickview-block form-type-material" action="/admin/notepad/add" method="post">
+
+            <div class="form-group">
+                <div class="form-group">
+                    <textarea class="form-control" rows="6" name="content"></textarea>
+                    <label>输入便签的内容</label>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit"> 发布标签</button>
+        </form>
+    </div>
+</div>
+
+<!-- Quickview - Edit product -->
+<div id="qv-form-center-edit" class="quickview">
+    <header class="quickview-header">
+        <p class="quickview-title lead">修改便签</p>
+        <span class="close"><i class="ti-close"></i></span>
+    </header>
+
+    <div class="quickview-body center-v">
+        <form class="quickview-block form-type-line" action="/admin/notepad/update" method="post">
+            <input type="hidden" class="notepadid" name="id" value="">
+            <div class="form-group">
+                <div class="form-group">
+                    <label>输入便签的内容</label>
+                    <textarea class="form-control notepadcontent" rows="6" name="content"></textarea>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit"> 发布便签</button>
+        </form>
+    </div>
+</div>
+<!-- END Quickview - Edit notepad -->
+<style>
+    .pagination li{
+        background: #fff;
+        padding: 0px 10px 0px 10px;
+        border-radius: 3px;
+    }
+    .pagination span{
+        cursor: no-drop;
+    }
+</style>
+<?php include VIEW_PATH.'public/footer.html' ;?>

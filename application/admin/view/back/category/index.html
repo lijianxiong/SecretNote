@@ -1,0 +1,36 @@
+<?php include VIEW_PATH.'template/header.html'; ?>
+<?php include VIEW_PATH.'template/sidebar.html'; ?>
+<div class="span9">
+    <div class="content">
+
+        <div class="module">
+            <div class="module-head">
+                <h3>创作分类</h3>
+            </div>
+            <div class="module-body">
+                <p><a href="/admin/category/add" class="btn btn-large">创建分类</a></p>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>分类名</th>
+                        <th>分类别名</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach( $category as $item): ?>
+                    <tr>
+                        <td><?=$item['id']?></td>
+                        <td><?=$item['name']?></td>
+                        <td><?=$item['slug']?></td>
+                        <td><a href="/admin/category/edit/<?=$item['id']?>" class="btn btn-mini">修改</a> / <a href="/admin/category/del/<?=$item['id']?>" class="btn btn-mini">删除</a></td>
+                    </tr>
+                    <?php endforeach;?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div><!--/.content-->
+</div><!--/.span9-->
+<?php include VIEW_PATH.'template/footer.html'; ?>

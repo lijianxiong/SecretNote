@@ -1,0 +1,27 @@
+<?php include VIEW_PATH.'template/header.html'; ?>
+<div class="span8" style="float: none;margin: 0 auto;">
+    <div class="content">
+        <div class="module">
+            <div class="module-head">
+                <h3>创作分享</h3>
+            </div>
+            <div class="module-body">
+                <section class="docs">
+                    <h2><?=@$article['title']?></h2>
+                    <div class="article-title">
+                        <p>
+                            <span class="create-time">发布时间：<?=date('Y-m-d H:i:s' , $article['create_time'])?></span> / <span><?=@$category[$article['category_id']]?></span>
+                        </p>
+                    </div>
+                    <div class="article-body">
+                        <?=@$article['content']?>
+                        <div class="oncopy">&copy; 如果你想转载，请注明来源或者出处</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!--/.content-->
+</div>
+<!--/.span9-->
+<?php include VIEW_PATH.'template/footer.html'; ?>

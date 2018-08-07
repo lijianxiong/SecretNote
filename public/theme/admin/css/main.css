@@ -1,0 +1,66 @@
+.article-body p{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.88;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+pre, code {
+    font-size: 14px;
+    font-weight: 100;
+    padding: 15px;
+    line-height: 25px;
+}
+.oncopy{
+    text-align: center;
+    font-size: 13px;
+}
+
+input{
+    -moz-box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border-color: #eaeaea;
+    background-color: #fcfcfc;
+}
+
+.twitter img{
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(204, 204, 204, 0.5);
+    padding: 3px;
+    margin-right: 5px;
+}
+.personface{
+    text-align: center;
+}
+.personface img{
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+}
+.upinput{
+    text-align: center;
+    margin-top: 25px;
+}
+.upfacebtn{
+    text-align: center;
+    margin: 30px 0px 30px 0px;
+}
+.pagination li{
+    display: inline-block;
+    background: #eee;
+    padding: 0px 15px 0px 15px;
+    margin: 0px 5px 0px 5px;
+    border-radius: 5px;
+}
+.pagination{
+    text-align: center;
+}

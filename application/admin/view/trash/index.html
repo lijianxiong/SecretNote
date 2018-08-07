@@ -1,0 +1,152 @@
+<?php include VIEW_PATH.'public/header.html' ;?>
+<!-- Main container -->
+<main>
+    <div class="main-content">
+        <div class="media-list media-list-divided media-list-hover" data-provide="selectall">
+            <form action="/admin/article/destroy" method="post">
+                <input type="hidden" name="type" value="article">
+
+                <header class="flexbox align-items-center media-list-header bg-transparent b-0 py-16 pl-20">
+                    <div class="flexbox align-items-center">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" onclick="checkAll();">
+                            <span class="custom-control-indicator"></span>
+                        </label>
+                        <span class="divider-line mx-1"></span>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 4px 12px;border-color: #ebebeb;">操作菜单</button>
+                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; top: 36px; left: 0px; will-change: top, left;">
+                                <a class="dropdown-item" href="/admin/article/write">新建创作</a>
+                                <a class="dropdown-item" href="/admin/category?opensidebar=open">新建分类</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" title="一旦删除无法恢复" data-provide="tooltip"><input type="submit" class="deletearticleall" value="删除选中创作"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="lookup lookup-circle lookup-right">
+                            <input type="text" data-provide="media-search" class="media-search">
+                        </div>
+                    </div>
+                </header>
+
+                <div class="media-list-body bg-white b-1">
+
+                    <?php foreach($article as $item): ?>
+                    <?php $id=$item['id']; ?>
+                    <input type="hidden" class="itemsid" value="<?=$item['id']?>">
+                    <div class="media align-items-center">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="aid[]" value="<?=$item['id']?>">
+                            <span class="custom-control-indicator"></span>
+                        </label>
+
+                        <label class="toggler fs-16 pl-12">
+                            <input type="checkbox" <?=$item['star'] == 1 ? 'checked' : '' ?> >
+                            <i class="fa fa-star click-star" data-id="<?=$item['id']?>"></i>
+                        </label>
+
+                        <a class="media-body text-truncate" href="#qv-product-details" data-toggle="quickview" data-id="<?=$item['id']?>">
+                            <h5><?=$item['title'];?></h5>
+                            <small><?=mb_substr(strip_tags($item['content']),0,200, 'utf-8'); ?></small>
+                        </a>
+
+                        <span><i class="fa fa-fw fa-share-alt"></i> <?=$item['links'] != 1 ? '<a href="/openlink/'.$item['links'].'" target="_blank">'.$item['links'].'</a>' : '暂无外链' ?></span>
+                        <span class="divider-line mx-1"></span>
+                        <span><i class="fa fa-fw fa fa-asterisk"></i> <a href="/admin/index/category/<?=@$item['category_id'];?>/<?=@$item['slug'];?>"><?=@$category[@$item['category_id']];?></a></span>
+                        <span class="divider-line mx-1"></span>
+                        <span class="lead text-fade mr-25" title="最后更新时间" data-provide="tooltip"><i class="fa fa-fw fa fa-clock-o"></i> <?=$item['update_time'];?></span>
+
+                        <div class="dropdown">
+                            <a class="text-lighter" href="#" data-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt rotate-90"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; top: 20px; left: -147px; will-change: top, left;">
+                                <a class="dropdown-item" href="/admin/article/edit/<?=$item['id'];?>"><i class="fa fa-fw fa-pencil-square-o"></i> 修改</a>
+                                <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','untrash','article','创作已经还原啦!','请求错误,请重试!')"><i class="fa fa-fw fa-mail-reply-all"></i> 还原创作</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','destroy','article','创作永久删除成功!','请求错误,请重试!')" title="一旦删除无法恢复" data-provide="tooltip"><i class="fa fa-fw fa-trash"></i> 删除创作</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </form>
+
+        </div>
+
+        <hr>
+        <div class="media-list media-list-divided media-list-hover">
+            <div class="media-list-body row b-1">
+                <?php foreach($notepad_list as $item): ?>
+                <?php $id = $item['id'];?>
+                <div class="col-md-6 col-lg-6">
+                    <div class="card">
+                        <div class="media">
+                            <img class="avatar" src="<?=@$userinfo['face_url']?>" alt="<?=@$nickname ? $nickname :'无名';?>">
+                            <div class="media-body">
+                                <p class="float-left"><strong><?=@$nickname ? $nickname :'无名';?></strong></p>
+                                <p><?=@$item['content'];?></p>
+                                <p><span datetime="<?=@date('Y-m-d H:i:s' , $item['create_time']);?>"><i class="ti-time"></i> <?=@date('Y-m-d H:i:s' , $item['create_time']);?></span> / <?=$item['links'] != 1 ? '<a href="/opentwitter/'.$item['links'].'" target="_blank">'.$item['links'].'</a>' : '暂无外链' ?> / <a href="#" title="一旦删除无法恢复" data-provide="tooltip" onclick="action('/admin/base/action','<?=$id;?>','destroy','notepad','便签删除成功!','便签删除失败!')">
+                                    <i class="fa fa-fw fa-trash-o"></i> 删除便签
+                                </a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <hr>
+        <div class="media-list media-list-divided media-list-hover">
+            <div class="media-list-body row b-1">
+
+                <?php foreach($category as $item): ?>
+                <?php $id = $item['id'];?>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body py-50 text-center">
+                            <h5 class="mt-3 mb-1"><?=@$item['name'];?></h5>
+                            <p class="text-fade"><?=@$item['slug'];?></p>
+                        </div>
+                        <div class="flexbox flex-justified bt-1 border-light py-12 bg-lightest text-center">
+                            <a class="text-muted" onclick="action('/admin/base/action','<?=$id;?>','untrash','category','分类已经还原啦!','请求失败,请重试!')">
+                                <i class="fa fa-fw fa-mail-reply-all"></i> 还原分类
+                            </a>
+                            <a class="text-muted" title="一旦删除无法恢复" data-provide="tooltip" onclick="action('/admin/base/action','<?=$id;?>','destroy','category','分类删除成功!','请求失败,请重试!')">
+                                <i class="fa fa-fw fa-trash-o"></i> 删除分类
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <?php endforeach; ?>
+            </div>
+
+        </div>
+
+
+    </div><!--/.main-content -->
+    <!-- Quickview - Product detail -->
+    <div id="qv-product-details" class="quickview quickview-lg">
+        <header class="quickview-header">
+            <p class="quickview-title lead fw-400" style="text-align: center;width: 100%;"><i class="fa fa-fw fa-circle-o-notch"></i> <span class="article-title"></span></p>
+            <span class="close"><i class="ti-close"></i></span>
+        </header>
+        <div class="quickview-body">
+            <div class="quickview-block form-type-material">
+
+                <div class="form-group">
+                    <div class="content"><p>如果网络稍慢，可能需要一些时间加载内容，请耐心等待...</p></div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="p-12 flexbox flex-justified" style="border-top: 1px solid #eee;">
+            <p style="margin: 0;text-align: center;"><i class="fa fa-fw fa-calendar"></i>创作时间： <span class="create-times"></span></p>
+        </footer>
+    </div>
+    <!-- END Quickview - Product detail -->
+</main>
+
+
+<?php include VIEW_PATH.'public/footer.html' ;?>

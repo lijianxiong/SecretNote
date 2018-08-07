@@ -1,0 +1,50 @@
+<?php include VIEW_PATH.'login/header.html'; ?>
+<div class="row no-gutters min-h-fullscreen bg-white">
+    <div class="col-md-6 col-lg-7 col-xl-8 d-none d-md-block bg-img" style="background-image: url(/theme/note/login/images/registerbg.jpg)" data-overlay="5">
+
+        <div class="row h-100 pl-50">
+            <div class="col-md-10 col-lg-8 align-self-end">
+                <!--<img src="/theme/note/login/images/bg_2.jpg" alt="...">-->
+                <br><br><br>
+                <h4 class="text-white">天空一无所有，为何给我安慰？</h4>
+                <p class="text-white">何为伴侣，柴米，油盐，木栅栏。可否具体，粗茶，淡饭，执子手。可否再具体，和你。</p>
+                <br><br>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-6 col-lg-5 col-xl-4 align-self-center">
+        <div class="px-80 py-30">
+            <h4>注册账户</h4>
+            <p><small>从有记忆开始，就喜欢站在屋檐下听雨声。</small></p>
+            <br>
+            <form class="form-type-material" action="/admin/login/register" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="code" id="code" value="<?=@$invcode;?>">
+                    <label for="code">邀请码</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="email" name="email">
+                    <label for="email">邮箱地址</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password">
+                    <label for="password">用户密码</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password-conf" name="repassword">
+                    <label for="password-conf">重复用户密码</label>
+                </div>
+                <br>
+                <button class="btn btn-bold btn-block btn-primary" type="submit">立刻注册</button>
+            </form>
+            <hr class="w-30px">
+            <p class="text-center text-muted fs-13 mt-20">如果你已经有了账户? <a class="text-primary fw-500" href="/admin/login">登入</a></p>
+        </div>
+    </div>
+
+</div>
+<?php include VIEW_PATH.'login/footer.html'; ?>

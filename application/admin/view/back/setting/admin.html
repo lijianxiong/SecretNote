@@ -1,0 +1,47 @@
+<?php include VIEW_PATH.'template/header.html'; ?>
+<?php include VIEW_PATH.'template/sidebar.html'; ?>
+<div class="span9">
+    <div class="content">
+
+        <div class="module">
+            <div class="module-head">
+                <h3>个人设置</h3>
+            </div>
+            <div class="module-body">
+
+                <form class="form-horizontal row-fluid" action="/admin/setting/adminupdate" method="post">
+                    <div class="control-group">
+                        <label class="control-label" for="web_name">网站名称：</label>
+                        <div class="controls">
+                            <input type="text" name="web_name" id="web_name" placeholder="请输入网站名称" class="span8" value="<?=@$setting['web_name']?>">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="admin_email">管理员邮箱：</label>
+                        <div class="controls">
+                            <input type="email" name="admin_email" id="admin_email" placeholder="请输入管理员邮箱" class="span8" value="<?=@$setting['admin_email']?>">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="web_url">网站地址：</label>
+                        <div class="controls">
+                            <input type="text" name="web_url" id="web_url" placeholder="请输入网站地址" class="span8" value="<?=@$setting['web_url']?>">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="btn">提交修改</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+    </div><!--/.content-->
+</div><!--/.span9-->
+<?php include VIEW_PATH.'template/footer.html'; ?>

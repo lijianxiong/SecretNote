@@ -1,0 +1,31 @@
+<?php include VIEW_PATH.'template/header.html'; ?>
+<?php include VIEW_PATH.'template/sidebar.html'; ?>
+<div class="span9">
+    <div class="content">
+
+        <div class="module">
+            <div class="module-head">
+                <h3>上传头像</h3>
+            </div>
+            <div class="module-body">
+                
+                <div class="personface">
+                    <img src="<?=@$userinfo['face_url'] ? $userinfo['face_url'] : '/upload/face/default.jpg'?>" alt="">
+                </div>
+
+                <form class="form-horizontal row-fluid" enctype="multipart/form-data" action="/admin/setting/uploadface" method="post">
+                    <div class="upinput">
+                        <input type="file" class="file" name="file" id="upface">
+                    </div>
+                    <div class="upfacebtn">
+                        <button type="submit" class="btn">提交修改</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+    </div><!--/.content-->
+</div><!--/.span9-->
+<?php include VIEW_PATH.'template/footer.html'; ?>

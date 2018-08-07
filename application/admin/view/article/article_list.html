@@ -1,0 +1,109 @@
+<?php include VIEW_PATH.'template/header.html'; ?>
+<?php include VIEW_PATH.'template/sidebar.html'; ?>
+<style>
+    .unread .dropdown-menu {
+        left: 22%;
+        min-width: 70px;
+    }
+    .dropdown-menu {
+        left: 2%;
+    }
+</style>
+<div class="span9">
+    <div class="content">
+        <div class="module message">
+            <div class="module-head">
+                <h3>所有创作</h3>
+            </div>
+            <div class="module-option clearfix">
+                <div class="pull-left">
+                    <div class="btn-group">
+                        <button class="btn">分类筛选</button>
+                        <button class="btn dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <?php foreach($getcategory as $item): ?>
+                            <li><a href="#"><?=$item['name'];?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <a href="#" class="btn btn-primary">批量删除</a>
+                </div>
+            </div>
+            <div class="module-body table">
+                <table class="table table-message">
+                    <tbody>
+                    <tr class="heading">
+                        <td class="cell-check">
+                            <input type="checkbox" class="inbox-checkbox">
+                        </td>
+                        <td class="cell-icon">
+                            标记
+                        </td>
+                        <td class="cell-title">
+                            标题
+                        </td>
+                        <td class="cell-title">
+                            更新时间
+                        </td>
+                        <td class="cell-icon hidden-phone hidden-tablet">
+                            外链
+                        </td>
+                        <td class="cell-time align-right">
+                            创作分类
+                        </td>
+                        <td class="cell-title align-right">
+                            操作
+                        </td>
+                    </tr>
+                    <?php foreach($list as $item): ?>
+                    <tr class="unread <?=$item['star'] == 1 ? 'starred' : '' ?>">
+                        <td class="cell-check">
+                            <input type="checkbox" class="inbox-checkbox">
+                        </td>
+                        <td class="cell-icon">
+                            <i class="icon-star" data-id="<?=$item['id']?>"></i>
+                        </td>
+                        <td class="cell-title">
+                            <a href="/admin/article/show/<?=$item['id'];?>" target="_blank"><?=$item['title'];?></a>
+                        </td>
+                        <td class="cell-title">
+                            <?=$item['update_time'];?>
+                        </td>
+                        <td class="cell-icon hidden-phone hidden-tablet">
+                            <i class="icon-paper-clip" data-id="<?=$item['id']?>"></i> <?=$item['links'] != 1 ? '<a href="/openlink/'.$item['links'].'" target="_blank">'.$item['links'].'</a>' : '暂无外链' ?>
+                        </td>
+                        <td class="cell-time align-right">
+                            <?=$category[$item['category_id']];?>
+                        </td>
+                        <td class="cell-title align-right">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">选择操作 <i class="icon-caret-down"></i></a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <li><a href="/admin/article/edit/<?=$item['id'];?>">修改</a></li>
+                                    <li><a href="/admin/article/del/<?=$item['id'];?>">删除</a></li>
+                                    <li><a href="/admin/article/linkdel/<?=$item['id'];?>">删除外链</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="module-foot">
+                <div class="nav page-navigation">
+                    <ul class="page-nav">
+                        {$list->render()}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.content-->
+</div>
+<!--/.span9-->
+<?php include VIEW_PATH.'template/footer.html'; ?>

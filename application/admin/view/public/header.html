@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="<?=$userinfo['description']?$userinfo['description']:$setting['description'];?>">
+    <meta name="keywords" content="admin, dashboard, web app, sass, ui kit, ui framework, bootstrap">
+    <title><?=@$title?></title>
+    <!-- Styles -->
+    <link href="/theme/note/static/css/core.min.css" rel="stylesheet">
+    <link href="/theme/note/static/css/app.min.css" rel="stylesheet">
+    <link href="/theme/note/static/css/main.css" rel="stylesheet">
+    <link href="/theme/note/assets/css/style.css" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/theme/note/static/img/apple-touch-icon.png">
+    <link rel="icon" href="/theme/note/static/img/favicon.png">
+    <script src="/theme/admin/scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+
+<!-- Preloader -->
+<!--<div class="preloader">-->
+    <!--<div class="spinner-dots">-->
+        <!--<span class="dot1"></span>-->
+        <!--<span class="dot2"></span>-->
+        <!--<span class="dot3"></span>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!-- Sidebar -->
+<aside class="sidebar sidebar-expand-lg sidebar-light sidebar-sm sidebar-color-info">
+
+    <header class="sidebar-header bg-info">
+        <span class="logo">
+          <a href="/"><?=$userinfo['nickname']?$userinfo['nickname']:$setting['web_name'];?></a>
+        </span>
+        <span class="sidebar-toggle-fold"></span>
+    </header>
+
+    <nav class="sidebar-navigation">
+        <ul class="menu menu-sm menu-bordery">
+
+            <li class="menu-item <?=@$homeActive;?>">
+                <a class="menu-link" href="/admin">
+                    <span class="icon ti-home"></span>
+                    <span class="title">创作中心</span>
+                </a>
+            </li>
+
+            <li class="menu-item <?=@$noteActive;?>">
+                <a class="menu-link" href="/admin/notepad">
+                    <span class="icon ti-notepad"></span>
+                    <span class="title">便签中心</span>
+                </a>
+            </li>
+
+            <li class="menu-item <?=@$markActive;?>">
+                <a class="menu-link" href="/admin/article/mark">
+                    <span class="icon ti-bookmark-alt"></span>
+                    <span class="title">收藏中心</span>
+                </a>
+            </li>
+
+            <li class="menu-item <?=@$categoryActive;?>">
+                <a class="menu-link" href="/admin/category">
+                    <span class="icon ti-eraser"></span>
+                    <span class="title">创作分类</span>
+                </a>
+            </li>
+
+            <li class="menu-item <?=@$trashActive;?>">
+                <a class="menu-link" href="/admin/trash">
+                    <span class="icon ti-trash"></span>
+                    <span class="title">回收站</span>
+                    <?=@$teashNum ? '<span class="badge badge-pill badge-info">'.@$teashNum.'</span>' : '' ?>
+                </a>
+            </li>
+
+            <?php if(@$userinfo['group'] == 'admin'): ?>
+            <li class="menu-item <?=@$adminActive;?>">
+                <a class="menu-link" href="/admin/setting/admin">
+                    <span class="icon ti-settings"></span>
+                    <span class="title">网站设置</span>
+                </a>
+            </li>
+            <?php endif;?>
+
+        </ul>
+    </nav>
+
+</aside>
+<!-- END Sidebar -->
+
+
+
+<!-- Topbar -->
+<header class="topbar">
+    <div class="topbar-left">
+        <span class="topbar-btn sidebar-toggler"><i>&#9776;</i></span>
+        <ul class="topbar-btns">
+
+            <!-- Notifications -->
+            <li class="dropdown d-none d-lg-block">
+                <span class="topbar-btn has-new" data-toggle="dropdown"><i class="ti-bell"></i></span>
+                <div class="dropdown-menu">
+
+                    <div class="media-list media-list-hover media-list-divided media-list-xs">
+                        <?php foreach($notice as $item): ?>
+                        <a class="media a-notice" data-toggle="modal" data-target="#modal-fill-notice" href="#" data-id="<?=$item['id']?>">
+                            <span class="avatar bg-success"><i class="ti-user"></i></span>
+                            <div class="media-body">
+                                <p><?=@$item['title'];?></p>
+                                <time datetime="<?=@$item['create_time'];?>"><?=@$item['create_time'];?></time>
+                            </div>
+                        </a>
+                        <?php endforeach; ?>
+                    </div>
+
+                </div>
+            </li>
+            <!-- END Notifications -->
+            <div class="modal modal-fill fade" data-backdrop="false" id="modal-fill-notice" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title notice-title">数据加载中...</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body notice-content">
+                            <p>数据加载中...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Messages -->
+            <li class="dropdown d-none d-lg-block">
+                <span class="topbar-btn" data-toggle="dropdown"><i class="ti-email"></i></span>
+                <div class="dropdown-menu">
+
+                    <div class="media-list media-list-divided media-list-hover media-list-xs scrollable" style="height: 290px">
+                        <a class="media media-new1" href="../../page-app/mailbox-single.html">
+                  <span class="avatar status-success">
+                    <img src="/theme/note/static/img/avatar/1.jpg" alt="...">
+                  </span>
+
+                            <div class="media-body">
+                                <p><strong>Maryam Amiri</strong> <time class="float-right" datetime="2017-07-14 20:00">23 min ago</time></p>
+                                <p class="text-truncate">Authoritatively exploit resource maximizing technologies before technically.</p>
+                            </div>
+                        </a>
+
+                        <a class="media" href="../../page-app/mailbox-single.html">
+                  <span class="avatar status-warning">
+                    <img src="/theme/note/static/img/avatar/2.jpg" alt="...">
+                  </span>
+
+                            <div class="media-body">
+                                <p><strong>Hossein Shams</strong> <time class="float-right" datetime="2017-07-14 20:00">48 min ago</time></p>
+                                <p class="text-truncate">Continually plagiarize efficient interfaces after bricks-and-clicks niches.</p>
+                            </div>
+                        </a>
+
+                        <a class="media" href="../../page-app/mailbox-single.html">
+                  <span class="avatar status-dark">
+                    <img src="/theme/note/static/img/avatar/3.jpg" alt="...">
+                  </span>
+
+                            <div class="media-body">
+                                <p><strong>Helen Bennett</strong> <time class="float-right" datetime="2017-07-14 20:00">3 hours ago</time></p>
+                                <p class="text-truncate">Objectively underwhelm cross-unit web-readiness before sticky outsourcing.</p>
+                            </div>
+                        </a>
+
+                        <a class="media" href="../../page-app/mailbox-single.html">
+                            <span class="avatar status-success bg-purple">FT</span>
+
+                            <div class="media-body">
+                                <p><strong>Fidel Tonn</strong> <time class="float-right" datetime="2017-07-14 20:00">21 hours ago</time></p>
+                                <p class="text-truncate">Interactively innovate transparent relationships with holistic infrastructures.</p>
+                            </div>
+                        </a>
+
+                        <a class="media" href="../../page-app/mailbox-single.html">
+                  <span class="avatar status-danger">
+                    <img src="/theme/note/static/img/avatar/4.jpg" alt="...">
+                  </span>
+
+                            <div class="media-body">
+                                <p><strong>Freddie Arends</strong> <time class="float-right" datetime="2017-07-14 20:00">Yesterday</time></p>
+                                <p class="text-truncate">Collaboratively visualize corporate initiatives for web-enabled value.</p>
+                            </div>
+                        </a>
+
+                        <a class="media" href="../../page-app/mailbox-single.html">
+                  <span class="avatar status-success">
+                    <img src="/theme/note/static/img/avatar/5.jpg" alt="...">
+                  </span>
+
+                            <div class="media-body">
+                                <p><strong>Freddie Arends</strong> <time class="float-right" datetime="2017-07-14 20:00">Yesterday</time></p>
+                                <p class="text-truncate">Interactively reinvent standards compliant supply chains through next-generation bandwidth.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="dropdown-footer">
+                        <div class="left">
+                            <a href="#">Read all messages</a>
+                        </div>
+
+                        <div class="right">
+                            <a href="#" data-provide="tooltip" title="Mark all as read"><i class="fa fa-circle-o"></i></a>
+                            <a href="#" data-provide="tooltip" title="Settings"><i class="fa fa-gear"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+            <!-- END Messages -->
+
+        </ul>
+        <div class="alert alert-warning alert-dismissible fade show show-tips" role="alert" style="margin-bottom:0rem;padding:5px 5px 5px 20px;display: none">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="padding: 0rem;"> <span aria-hidden="true">×</span>
+            </button> <strong>提示!</strong> <span class="header-tips">点击即可关闭此提示</span>
+        </div>
+    </div>
+
+    <div class="topbar-right">
+
+        <ul class="topbar-btns">
+            <li class="dropdown">
+                <span class="topbar-btn" data-toggle="dropdown"><img class="avatar" src="<?=@$userinfo['face_url'] ? $userinfo['face_url'] : '/upload/face/default.jpg'?>" alt="..."></span>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="/admin/person/setting"><i class="ti-user"></i> 个人设置</a>
+                    <a class="dropdown-item" href="/admin/loginlog"><i class="ti-desktop"></i> 登录日志</a>
+                    <?php if(@$userinfo['group'] == 'admin'): ?>
+                    <a class="dropdown-item" href="/admin/setting/user"><i class="ti-user"></i> 用户管理</a>
+                    <a class="dropdown-item" href="/admin/invitation"><i class="ti-gift"></i> 邀请码管理</a>
+                    <?php endif; ?>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/admin/login/logout"><i class="ti-power-off"></i> 登出账号</a>
+                </div>
+            </li>
+        </ul>
+        <form class="lookup lookup-circle lookup-right" action="/admin/search" method="get">
+            <input type="text" name="keyword" placeholder="开始搜索创作">
+        </form>
+    </div>
+</header>
+<!-- END Topbar -->

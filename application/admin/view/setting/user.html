@@ -1,0 +1,61 @@
+<?php include VIEW_PATH.'public/header.html' ;?>
+<main>
+    <div class="main-content">
+        <div class="media-list media-list-divided">
+            <div class="media-list-body bg-white b-1">
+                <?php foreach($userList as $item): ?>
+                <?php $id = $item['id']; ?>
+                <div class="media align-items-center">
+                    <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                    </label>
+                    <label class="toggler fs-16 pl-12 d-none d-md-block">
+                        <input type="checkbox">
+                        <i class="fa fa-star"></i>
+                    </label>
+                    <span class="flexbox align-items-center flex-grow gap-items">
+                        <img class="avatar" src="<?=@$item['face_url'] ? $item['face_url'] : '/upload/face/default.jpg' ;?>" alt="...">
+                        <div class="media-body">
+                            <h6><?=@$item['nickname'];?></h6>
+                            <small>
+                                <span>UID:<?=@$item['id'];?></span>
+                                <span class="divider-dash"><?=@$item['email'];?></span>
+                            </small>
+                        </div>
+                    </span>
+                    <span class="lead text-fade mr-25 d-none d-md-block" title="注册时间" data-provide="tooltip" data-original-title="Balance"><?=@date('Y-m-d H:i:s',$item['create_time']);?></span>
+                    <div class="dropdown">
+                        <a class="text-lighter" href="#" data-toggle="dropdown"><i class="ti-more-alt rotate-90"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <!--<a class="dropdown-item" href="#"><i class="fa fa-fw fa-phone"></i> Call</a>-->
+                            <!--<a class="dropdown-item" href="#"><i class="fa fa-fw fa-commenting"></i> Message</a>-->
+                            <!--<a class="dropdown-item" href="#"><i class="fa fa-fw fa-envelope"></i> Email</a>-->
+                            <!--<div class="dropdown-divider"></div>-->
+                            <a class="dropdown-item" onclick="action('/admin/setting/deluser','<?=$id;?>','del','member','用户删除成功!','用户删除失败!')"><i class="fa fa-fw fa-trash"></i> 删除用户</a>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+        </div>
+        <footer class="flexbox align-items-center py-20">
+            <span class="flex-grow text-right text-lighter pr-2"></span>
+            <nav>
+                <?=@$page;?>
+            </nav>
+        </footer>
+    </div><!--/.main-content -->
+</main>
+<style>
+    .pagination li{
+        background: #fff;
+        padding: 0px 10px 0px 10px;
+        border-radius: 3px;
+    }
+    .pagination span{
+        cursor: no-drop;
+    }
+</style>
+<?php include VIEW_PATH.'public/footer.html' ;?>

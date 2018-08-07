@@ -1,0 +1,68 @@
+<?php include VIEW_PATH.'public/header.html' ;?>
+<!-- Main container -->
+<main>
+    <div class="main-content">
+        <div class="row">
+            <div class="col-lg-12 tab-content">
+                <form class="card form-type-material tab-pane fade active show" id="tab1" action="/admin/article/add" method="post">
+                    <h4 class="card-title fw-400">开始创作 Create Article</h4>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" name="title" type="text" value="">
+                                    <label>输入创作标题</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <select class="form-control" data-provide="selectpicker" name="category_id">
+                                        <?php if(!empty($category)): ?>
+                                        <?php foreach($category as $item): ?>
+                                        <option value="<?=$item['id']?>"><?=@$item['name']?></option>
+                                        <?php endforeach; ?>
+                                        <?php endif;?>
+                                    </select>
+                                    <label>选择创作分类</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="text" name="create_time" class="form-control" value="<?=date('Y-m-d H:i:s' ,time());?>">
+                                    <label>创建时间</label>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="description" placeholder="输入简介内容建议200文字以内..." value="">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <script id="container" name="content" type="text/plain"></script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer text-right">
+                        <button class="btn btn-w-md btn-info" type="submit">立刻发布创作</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- 配置文件 -->
+<script type="text/javascript" src="/uedit/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/uedit/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>
+<style>
+    .dropdown-menu{
+        z-index: 9999;
+    }
+</style>
+<?php include VIEW_PATH.'public/footer.html' ;?>

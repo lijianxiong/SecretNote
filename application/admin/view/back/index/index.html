@@ -1,0 +1,69 @@
+<?php include VIEW_PATH.'template/header.html'; ?>
+<?php include VIEW_PATH.'template/sidebar.html'; ?>
+
+<div class="span9">
+    <div class="content">
+
+        <div class="module">
+            <div class="module-head">
+                <h3>每日心情</h3>
+            </div>
+            <div class="module-body">
+                <div class="stream-composer media">
+                    <a href="#" class="media-avatar medium pull-left">
+                        <img src="<?=@$userinfo['face_url']?>">
+                    </a>
+                    <div class="media-body">
+                        <form method="post" action="/admin/twitter/add">
+                        <div class="row-fluid">
+                            <textarea name="content" class="span12" style="height: 70px; resize: none;"></textarea>
+                        </div>
+                        <div class="clearfix">
+                            <button type="submit" class="btn btn btn-primary pull-right">发布心情</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="stream-list">
+                    <?php foreach($twitter as $item): ?>
+                    <div class="media stream">
+                        <span class="twitter pull-left">
+                            <img src="<?=@$userinfo['face_url']?>">
+                        </span>
+                        <div class="media-body">
+                            <div class="stream-headline">
+                                <h5 class="stream-author">
+                                    <?=@$userinfo['nickname']?>
+                                    <small><?=date('Y-m-d H:i:s',$item['create_time'])?></small>
+                                </h5>
+                                <div class="stream-text">
+                                    <?=$item['content']?>
+                                </div>
+                            </div><!--/.stream-headline-->
+                            <div class="stream-options">
+                                <a class="btn btn-small">
+                                    <i class="icon-share shaded" data-id="<?=$item['id']?>">
+                                    生成外链</i>
+                                </a>
+
+                                <i class="icon-link shaded">
+                                    <?=$item['links'] != 1 ? '<a href="/opentwitter/'.$item['links'].'" target="_blank" class="btn btn-small">'.$item['links'].'</a>' : '暂无外链' ?></i>
+                            </div>
+                        </div>
+                    </div><!--/.media .stream-->
+                    <?php endforeach;?>
+
+                    <div class="media stream load-more">
+                        <a href="#">
+                            <i class="icon-refresh shaded"></i>
+                            show more...
+                        </a>
+                    </div>
+                </div><!--/.stream-list-->
+            </div><!--/.module-body-->
+        </div><!--/.module-->
+
+    </div><!--/.content-->
+</div><!--/.span9-->
+<?php include VIEW_PATH.'template/footer.html'; ?>

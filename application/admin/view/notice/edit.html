@@ -1,0 +1,26 @@
+<?php include VIEW_PATH.'public/header.html' ;?>
+
+<main>
+    <div class="main-content">
+
+        <form class="card form-type-line tab-pane" id="tab2" action="/admin/notice/update" method="post">
+            <input type="hidden" name="id" value="<?=@$noticeitem['id'];?>">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="input-placeholder">公告标题</label>
+                    <input type="text" name="title" class="form-control" placeholder="请输入公告标题" id="input-placeholder" value="<?=@$noticeitem['title'];?>">
+                </div>
+                <div class="form-group">
+                    <textarea data-provide="summernote" name="content" data-toolbar="slim" id="textarea"><?=@$noticeitem['content'];?></textarea>
+                </div>
+            </div>
+            <footer class="card-footer text-right">
+                <button class="btn btn-flat btn-primary" type="submit">修改公告</button>
+            </footer>
+        </form>
+
+
+    </div><!--/.main-content -->
+</main>
+
+<?php include VIEW_PATH.'public/footer.html' ;?>

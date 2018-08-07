@@ -1,0 +1,195 @@
+<?php include VIEW_PATH.'public/header.html' ;?>
+
+<main>
+    <div class="main-content">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card">
+                    <ul class="nav nav-lg nav-pills flex-column">
+                        <li class="nav-item active" data-toggle="tab" data-target="#tab2">
+                            <a class="nav-link" href="/admin/setting/person">个人资料</a>
+                        </li>
+                        <li class="nav-item" data-toggle="tab" data-target="#tab3">
+                            <a class="nav-link" href="#">头像设置</a>
+                        </li>
+                        <li class="nav-item" data-toggle="tab" data-target="#tab4">
+                            <a class="nav-link" href="#">修改密码</a>
+                        </li>
+                        <li class="nav-item" data-toggle="tab" data-target="#tab5">
+                            <a class="nav-link" href="#">Email Settings</a>
+                        </li>
+                        <li class="nav-item" data-toggle="tab" data-target="#tab6">
+                            <a class="nav-link" href="#">Email Notification</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9 tab-content">
+                <form class="card form-type-material tab-pane fade active show" id="tab2" action="/admin/person/updata" method="post">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="username" value="<?=@$user['username']?>" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="15">
+                                    <label>用户名</label>
+                                    <small class="form-text">通常只允许修改一次</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="nickname" value="<?=@$user['nickname']?>" maxlength="25">
+                                    <label>个性名称</label>
+                                    <small class="form-text">让被人更容易记住你</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="email" name="email" value="<?=@$user['email']?>">
+                            <label>邮箱地址</label>
+                            <small class="form-text">用作登录账号</small>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="description" value="<?=@$user['description']?>" maxlength="250">
+                            <label>个性签名</label>
+                        </div>
+
+                    </div>
+                    <footer class="card-footer text-right">
+                        <button class="btn btn-flat btn-primary" type="submit">提交修改</button>
+                    </footer>
+                </form>
+                <form class="card form-type-material tab-pane fade" enctype="multipart/form-data" id="tab3" action="/admin/person/uploadface" method="post">
+                    <div class="card-body">
+                        <div class="flexbox gap-items-4">
+                            <!--<img class="avatar avatar-xl" src="<?=@$userinfo['face_url'] ? $userinfo['face_url'] : '/upload/face/default.jpg'?>" alt="...">-->
+                            <div class="flex-grow">
+                                <div class="d-felx flex-column flex-sm-row gap-y gap-items-2 mt-16">
+                                    <div class="col-md-12">
+                                        <input type="file" data-provide="dropify" name="file">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer text-right">
+                        <button class="btn btn-flat btn-primary" type="submit">提交修改</button>
+                    </footer>
+                </form>
+                <form class="card form-type-material tab-pane fade" id="tab4" action="/admin/person/updatepassword" method="post">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="password" value="">
+                                    <label>新密码</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="repassword" value="">
+                                    <label>重复新密码</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer text-right">
+                        <button class="btn btn-flat btn-primary" type="submit">提交修改</button>
+                    </footer>
+                </form>
+                <form class="card tab-pane fade" id="tab5">
+                    <h4 class="card-title fw-400">Email Settings</h4>
+                    <div class="card-body">
+                        <div class="row form-type-material">
+                            <div class="col-md-6">
+                                <div class="form-group do-float">
+                                    <div class="btn-group bootstrap-select form-control"><button type="button" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="button" title="Modern"><span class="filter-option pull-left">Modern</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="dropdown-menu inner" role="listbox" aria-expanded="false"><a class="dropdown-item selected" data-original-index="0"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Modern</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="1"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Light</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="2"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Dark</span><span class=" ti-check check-mark"></span></span></a></div></div><select class="form-control" data-provide="selectpicker" tabindex="-98">
+                                        <option selected="">Modern</option>
+                                        <option>Light</option>
+                                        <option>Dark</option>
+                                    </select></div>
+                                    <label>Email template</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group do-float">
+                                    <div class="btn-group bootstrap-select form-control"><button type="button" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="button" title="Roboto"><span class="filter-option pull-left">Roboto</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="dropdown-menu inner" role="listbox" aria-expanded="false"><a class="dropdown-item selected" data-original-index="0"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Roboto</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="1"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Open Sans</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="2"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Ubunto</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="3"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Arial</span><span class=" ti-check check-mark"></span></span></a></div></div><select class="form-control" data-provide="selectpicker" tabindex="-98">
+                                        <option selected="">Roboto</option>
+                                        <option>Open Sans</option>
+                                        <option>Ubunto</option>
+                                        <option>Arial</option>
+                                    </select></div>
+                                    <label>Font</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="switch">
+                                <input type="checkbox" checked="">
+                                <span class="switch-indicator"></span>
+                                <span class="switch-description">Attach PDFs</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="switch">
+                                <input type="checkbox" checked="">
+                                <span class="switch-indicator"></span>
+                                <span class="switch-description">Send as HTML</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="switch">
+                                <input type="checkbox" checked="">
+                                <span class="switch-indicator"></span>
+                                <span class="switch-description">Include a link to PDF</span>
+                            </label>
+                        </div>
+                    </div>
+                    <footer class="card-footer text-right">
+                        <button class="btn btn-flat btn-primary" type="submit">Save Changes</button>
+                    </footer>
+                </form>
+                <form class="card tab-pane fade" id="tab6">
+                    <h4 class="card-title fw-400">Email Settings</h4>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="switch">
+                                <input type="checkbox" checked="">
+                                <span class="switch-indicator"></span>
+                                <span class="switch-description">Email me when an invoice is sent</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="switch-indicator"></span>
+                                <span class="switch-description">Email me when an invoice is viewed</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="switch">
+                                <input type="checkbox" checked="">
+                                <span class="switch-indicator"></span>
+                                <span class="switch-description">Email me when an invoice is paid</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="switch">
+                                <input type="checkbox" checked="">
+                                <span class="switch-indicator"></span>
+                                <span class="switch-description">Email me when a quote is approved</span>
+                            </label>
+                        </div>
+                    </div>
+                    <footer class="card-footer text-right">
+                        <button class="btn btn-flat btn-primary" type="submit">Save Changes</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<?php include VIEW_PATH.'public/footer.html' ;?>

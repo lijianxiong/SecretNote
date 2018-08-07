@@ -1,0 +1,79 @@
+<?php include VIEW_PATH.'template/header.html'; ?>
+<?php include VIEW_PATH.'template/sidebar.html'; ?>
+<style>
+    .form-horizontal .control-label {
+        float: left;
+        width: 70px;
+        padding-top: 5px;
+        text-align: left;
+    }
+    .form-horizontal .controls {
+        margin-left: 70px;
+    }
+    .btn{
+        width: 100%;
+    }
+    .form-horizontal .controls {
+        margin-left: 0px;
+    }
+</style>
+<div class="span9">
+    <div class="content">
+        <div class="module">
+            <div class="module-head">
+                <h3>开始创作吧，从今天这一刻开始</h3>
+            </div>
+            <div class="module-body">
+                <form class="form-horizontal row-fluid" action="/admin/article/update" method="post">
+                    <input type="hidden" name="id" value="<?=@$article['id']?>">
+                    <div class="control-group">
+                        <label class="control-label" for="category">创作分类</label>
+                        <div class="controls">
+                            <select tabindex="1" data-placeholder="选择分类" id="category" class="span3" name="category_id">
+                                <?php foreach($category as $item): ?>
+                                <option <?=$article['category_id'] == $item['id'] ? 'selected' : ''; ?> value="<?=$item['id']?>"><?=$item['name']?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="create_time">创作时间</label>
+                        <div class="controls">
+                            <input type="text" id="create_time" name="create_time" class="form-control" value="<?=$article['update_time']?>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="title">创作标题</label>
+                        <div class="controls">
+                            <input type="text" name="title" id="title" placeholder="从琐碎开始创作" class="span5" value="<?=$article['title']?>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="description">创作简介</label>
+                        <div class="controls">
+                            <input type="text" name="description" id="description" placeholder="从琐碎的片段想起" class="span5" value="<?=$article['description']?>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <script id="container" name="content" type="text/plain"><?=$article['content']?></script>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="btn">发布创作</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!--/.content-->
+</div>
+<!-- 配置文件 -->
+<script type="text/javascript" src="/uedit/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/uedit/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>
+<?php include VIEW_PATH.'template/footer.html'; ?>

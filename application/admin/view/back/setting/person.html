@@ -1,0 +1,53 @@
+<?php include VIEW_PATH.'template/header.html'; ?>
+<?php include VIEW_PATH.'template/sidebar.html'; ?>
+<div class="span9">
+    <div class="content">
+
+        <div class="module">
+            <div class="module-head">
+                <h3>个人设置</h3>
+            </div>
+            <div class="module-body">
+                <form class="form-horizontal row-fluid" action="/admin/setting/updata" method="post">
+                    <div class="control-group">
+                        <label class="control-label" for="username">用户名：</label>
+                        <div class="controls">
+                            <input type="text" name="username" id="username" placeholder="只允许修改一次" class="span8" value="<?=@$user['username']?>">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="nickname">个性名称：</label>
+                        <div class="controls">
+                            <input type="text" name="nickname" id="nickname" placeholder="让被人更容易记住你" class="span8" value="<?=@$user['nickname']?>">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="email">邮箱地址：</label>
+                        <div class="controls">
+                            <input type="email" name="email" id="email" placeholder="让被人更容易记住你" class="span8" value="<?=@$user['email']?>">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="description">个性签名：</label>
+                        <div class="controls">
+                            <textarea name="description" id="description" class="span8" rows="5"><?=@$user['description']?></textarea>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="btn">提交修改</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+    </div><!--/.content-->
+</div><!--/.span9-->
+<?php include VIEW_PATH.'template/footer.html'; ?>

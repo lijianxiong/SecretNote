@@ -1,0 +1,185 @@
+<?php include VIEW_PATH.'public/header.html' ;?>
+<!-- Main container -->
+<main>
+    <div class="main-content">
+        <div class="media-list media-list-divided media-list-hover" data-provide="selectall">
+            <form action="/admin/del" method="post">
+                <input type="hidden" name="type" value="article">
+                <header class="flexbox align-items-center media-list-header bg-transparent b-0 py-16 pl-20">
+                    <div class="flexbox align-items-center">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" onclick="checkAll();">
+                            <span class="custom-control-indicator"></span>
+                        </label>
+                        <span class="divider-line mx-1"></span>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 4px 12px;border-color: #ebebeb;">操作菜单</button>
+                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; top: 36px; left: 0px; will-change: top, left;">
+                                <a class="dropdown-item" href="/admin/article/write">新建创作</a>
+                                <a class="dropdown-item" href="/admin/category?opensidebar=open">新建分类</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"><input type="submit" class="deletearticleall" value="删除选中创作"></a>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <a class="btn btn-sm dropdown-toggle" data-toggle="dropdown" href="#">查看分类</a>
+                            <div class="dropdown-menu">
+                                <?php foreach($getcategory as $item): ?>
+                                <a class="dropdown-item" href="/admin/index/category/<?=$item['id'];?>/<?=$item['slug'];?>"><?=$item['name'];?></a>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="lookup lookup-circle lookup-right">
+                            <input type="text" data-provide="media-search" class="media-search">
+                        </div>
+                    </div>
+                </header>
+                <div class="media-list-body bg-white b-1">
+
+                    <?php foreach($article as $item): ?>
+                    <?php $id=$item['id'];?>
+                    <input type="hidden" class="itemsid" value="<?=$item['id']?>">
+                    <div class="media align-items-center">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="aid[]" value="<?=$item['id']?>">
+                            <span class="custom-control-indicator"></span>
+                        </label>
+
+                        <label class="toggler fs-16 pl-12">
+                            <input type="checkbox" <?=$item['star'] == 1 ? 'checked' : '' ?> >
+                            <i class="fa fa-star" onclick="action('/admin/base/action','<?=$id;?>','star','article','创作收藏成功啦!','取消收藏成功啦!')"></i>
+                        </label>
+
+                        <a class="media-body text-truncate" href="#qv-product-details" data-toggle="quickview" data-id="<?=$item['id']?>">
+                            <h5><?=$item['title'];?></h5>
+                            <small><?=mb_substr(strip_tags($item['content']),0,200, 'utf-8'); ?></small>
+                        </a>
+
+                        <span><i class="fa fa-fw fa-share-alt"></i> <?=$item['links'] != 1 ? '<a href="/openlink/'.$item['links'].'" target="_blank">'.$item['links'].'</a>' : '暂无外链' ?></span>
+                        <span class="divider-line mx-1"></span>
+                        <span><i class="fa fa-fw fa fa-asterisk"></i>
+
+                        <a href="<?=@$category[@$item['category_id']] ? '/admin/index/category/'.$item['category_id'].'/' : '#';?>"><?=@$category[@$item['category_id']] ? @$category[@$item['category_id']] : '分类不存在';?></a>
+
+                    </span>
+                        <span class="divider-line mx-1"></span>
+                        <span class="lead text-fade mr-25" title="最后更新时间" data-provide="tooltip"><i class="fa fa-fw fa fa-clock-o"></i> <?=@date('Y-m-d H:i:s',$item['update_time']);?></span>
+
+                        <div class="dropdown">
+                            <a class="text-lighter" href="#" data-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt rotate-90"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; top: 20px; left: -147px; will-change: top, left;">
+                                <a class="dropdown-item" href="/admin/article/edit/<?=$item['id'];?>"><i class="fa fa-fw fa-pencil-square-o"></i> 修改</a>
+                                <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','link','article','外链生成啦!','已经生成了过外链了!')"><i class="fa fa-fw fa-share-alt"></i> 生成外链</a>
+                                <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','linkdel','article','外链删除成功!','创作没有外链!')"><i class="fa fa-fw fa-share-alt-square"></i> 删除外链</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','del','article','创作删除成功!','创作删除失败!')"><i class="fa fa-fw fa-trash"></i> 删除创作</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </form>
+
+        </div>
+        <hr>
+        <div class="media-list media-list-divided media-list-hover">
+            <div class="media-list-body row b-1">
+                <?php foreach($notepad_list as $item): ?>
+                <?php $id=$item['id'];?>
+                <div class="col-md-6 col-lg-6">
+                    <div class="card">
+                        <div class="media">
+                            <img class="avatar" src="<?=@$userinfo['face_url']?>" alt="<?=@$userinfo['nickname'] ? $userinfo['nickname'] :'无名';?>">
+                            <div class="media-body">
+                                <p class="float-left"><strong><?=@$userinfo['nickname'] ? $userinfo['nickname'] :'无名';?></strong></p>
+                                <ul class="card-controls">
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" href="#" aria-expanded="false"><i class="ti-more-alt rotate-90"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end">
+                                            <a class="dropdown-item editnote" href="#qv-form-center-edit" data-toggle="quickview" data-id="<?=$item['id']?>">
+                                                <i class="fa fa-fw fa-pencil-square-o"></i> 修改
+                                            </a>
+                                            <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','share','notepad','外链已经生成!','外链已经删除!')">
+                                                <i class="fa fa-fw fa-link"></i> 生成外链
+                                            </a>
+                                            <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','star','notepad','收藏便签成功!','收藏便签失败!')">
+                                                <i class="fa fa-fw fa-bookmark"></i> 收藏便签
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" onclick="action('/admin/base/action','<?=$id;?>','del','notepad','便签删除成功!','便签删除失败!')">
+                                                <i class="fa fa-fw fa-trash-o"></i> 删除便签
+                                            </a>
+                                            <!--<a class="dropdown-item" href="#"><i class="ti-export"></i> Export</a>-->
+                                            <!--<a class="dropdown-item" href="#"><i class="ti-printer"></i> Print</a>-->
+
+                                            <!--<a class="dropdown-item" href="#"><i class="ti-settings"></i> Settings</a>-->
+                                        </div>
+                                    </li>
+                                </ul>
+                                <p><?=@$item['content'];?></p>
+                                <p><span datetime="<?=@date('Y-m-d H:i:s' , $item['create_time']);?>"><i class="ti-time"></i> <?=@date('Y-m-d H:i:s' , $item['create_time']);?></span> / <?=$item['links'] != 1 ? '<a href="/opentwitter/'.$item['links'].'" target="_blank">'.$item['links'].'</a>' : '暂无外链' ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div><!--/.main-content -->
+    <!-- Quickview - Product detail -->
+    <div id="qv-product-details" class="quickview quickview-lg">
+        <header class="quickview-header">
+            <p class="quickview-title lead fw-400" style="text-align: center;width: 100%;"><i class="fa fa-fw fa-circle-o-notch"></i> <span class="article-title"></span></p>
+            <span class="close"><i class="ti-close"></i></span>
+        </header>
+        <div class="quickview-body">
+            <div class="quickview-block form-type-material">
+
+                <div class="form-group">
+                    <div class="content"><p>如果网络稍慢，可能需要一些时间加载内容，请耐心等待...</p></div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="p-12 flexbox flex-justified" style="border-top: 1px solid #eee;">
+            <p style="margin: 0;text-align: center;"><i class="fa fa-fw fa-calendar"></i>创作时间： <span class="create-times"></span></p>
+        </footer>
+    </div>
+    <!-- END Quickview - Product detail -->
+    <!-- Quickview - Edit product -->
+    <div id="qv-form-center-edit" class="quickview">
+        <header class="quickview-header">
+            <p class="quickview-title lead">修改便签</p>
+            <span class="close"><i class="ti-close"></i></span>
+        </header>
+
+        <div class="quickview-body center-v">
+            <form class="quickview-block form-type-line" action="/admin/notepad/update" method="post">
+                <input type="hidden" class="notepadid" name="id" value="">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>输入便签的内容</label>
+                        <textarea class="form-control notepadcontent" rows="6" name="content"></textarea>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit"> 发布便签</button>
+            </form>
+        </div>
+    </div>
+    <!-- END Quickview - Edit notepad -->
+</main>
+<style>
+    .pagination li{
+        background: #fff;
+        padding: 0px 10px 0px 10px;
+        border-radius: 3px;
+    }
+    .pagination span{
+        cursor: no-drop;
+    }
+</style>
+<?php include VIEW_PATH.'public/footer.html' ;?>

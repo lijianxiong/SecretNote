@@ -1,0 +1,163 @@
+<?php include VIEW_PATH.'public/header.html' ;?>
+
+<main>
+    <div class="main-content">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card">
+                    <ul class="nav nav-lg nav-pills flex-column">
+                        <li class="nav-item active" data-toggle="tab" data-target="#tab1">
+                            <a class="nav-link" href="#">网站全局设置</a>
+                        </li>
+                        <li class="nav-item" data-toggle="tab" data-target="#tab2">
+                            <a class="nav-link" href="#">发送全局公告</a>
+                        </li>
+                        <li class="nav-item" data-toggle="tab" data-target="#tab3">
+                            <a class="nav-link" href="#">管理全局公告</a>
+                        </li>
+                        <li class="nav-item" data-toggle="tab" data-target="#tab4">
+                            <a class="nav-link" href="#">网站邮箱设置</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9 tab-content">
+                <form class="card form-type-material tab-pane fade active show" id="tab1" action="/admin/setting/adminupdate" method="post">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="web_name" placeholder="请输入网站名称" value="<?=@$setting['web_name']?>">
+                                    <label>网站名称</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="email" name="admin_email" placeholder="请输入管理员邮箱" value="<?=@$setting['admin_email']?>">
+                                    <label>管理员邮箱</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="url" name="web_url" placeholder="请输入网站地址" value="<?=@$setting['web_url']?>">
+                                    <label>网站地址</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="description" placeholder="请输入网站介绍" value="<?=@$setting['description']?>">
+                                    <label>网站介绍</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="icp" placeholder="请输入ICP备案号码" value="<?=@$setting['icp']?>">
+                                    <label>ICP备案号码</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer text-right">
+                        <button class="btn btn-flat btn-primary" type="submit">提交修改</button>
+                    </footer>
+                </form>
+
+                <form class="card form-type-line tab-pane fade" id="tab2" action="/admin/notice/add" method="post">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="input-placeholder">公告标题</label>
+                            <input type="text" name="title" class="form-control" placeholder="请输入公告标题" id="input-placeholder">
+                        </div>
+                        <div class="form-group">
+                            <label for="textarea">公告内容</label>
+                            <textarea data-provide="summernote" name="content" data-toolbar="slim" id="textarea"></textarea>
+                        </div>
+                    </div>
+                    <footer class="card-footer text-right">
+                        <button class="btn btn-flat btn-primary" type="submit">发送公告</button>
+                    </footer>
+                </form>
+
+                <form class="card form-type-material tab-pane fade" id="tab3">
+                    <div class="card-body">
+                        <table class="table table-separated">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>管理员</th>
+                                <th>公告标题</th>
+                                <th>发送时间</th>
+                                <th class="text-center w-100px">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($notice as $item): ?>
+                            <?php $id = $item['id']; ?>
+                            <tr>
+                                <th scope="row"><?=@$item['id'];?></th>
+                                <td><?=@$item['user_id'];?></td>
+                                <td><?=@$item['title'];?></td>
+                                <td><?=@$item['create_time'];?></td>
+                                <td class="text-right table-actions">
+                                    <a class="table-action hover-primary" href="/admin/notice/edit/<?=@$item['id'];?>"><i class="ti-pencil"></i></a>
+                                    <a class="table-action hover-danger" href="#" onclick="action('/admin/base/action','<?=$id;?>','notice','notice','公告永久删除成功啦!','请求错误,请重试!')" title="一旦删除无法恢复" data-provide="tooltip"><i class="ti-trash"></i></a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+
+                <form class="card form-type-material tab-pane fade" id="tab4" action="/admin/setting/setemail" method="post">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="host" placeholder="请输入邮件服务器" value="<?=@$emailSetting['host']?>">
+                                    <label>邮件服务器</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="username" placeholder="请输入登录名" value="<?=@$emailSetting['username']?>">
+                                    <label>邮箱登录名</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="password" placeholder="请输入密码" value="<?=@$emailSetting['password']?>">
+                                    <label>邮箱发信密码</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="number" name="port" placeholder="请输入端口" value="<?=@$emailSetting['port']?>">
+                                    <label>邮箱端口号</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="nickname" placeholder="请输入发送人名称" value="<?=@$emailSetting['nickname']?>">
+                                    <label>发送人名称</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="secure" placeholder="请输入加密类型" value="<?=@$emailSetting['secure']?>">
+                                    <label>邮箱加密类型</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer text-right">
+                        <button class="btn btn-flat btn-primary" type="submit">提交修改</button>
+                    </footer>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<?php include VIEW_PATH.'public/footer.html' ;?>

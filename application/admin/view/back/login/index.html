@@ -1,0 +1,42 @@
+<?php include VIEW_PATH.'login/header.html' ?>
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="module module-login span4 offset4">
+                <form class="form-vertical" action="" method="post">
+                    <div class="module-head">
+                        <h3>开始登陆</h3>
+                    </div>
+                    <div class="module-body">
+                        <div class="control-group">
+                            <div class="controls row-fluid">
+                                <input name="username" class="span12" type="text" id="inputEmail" placeholder="邮箱/用户名">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls row-fluid">
+                                <input name="password" class="span12" type="password" id="inputPassword" placeholder="用户密码">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls row-fluid">
+                                <a href="/admin/login/register">注册一个账户</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="module-foot">
+                        <div class="control-group">
+                            <div class="controls clearfix">
+                                <button type="submit" class="btn btn-primary pull-right">登录</button>
+                                <label class="checkbox">
+                                    <input type="checkbox"> 记住登录
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--/.wrapper-->
+<?php include VIEW_PATH.'login/footer.html' ?>

@@ -1,0 +1,57 @@
+<?php include VIEW_PATH.'login/header.html'; ?>
+<div class="row no-gutters min-h-fullscreen bg-white">
+    <div class="col-md-6 col-lg-7 col-xl-8 d-none d-md-block bg-img" style="background-image: url(/theme/note/login/images/loginbg.jpg)" data-overlay="5">
+
+        <div class="row h-100 pl-50">
+            <div class="col-md-10 col-lg-8 align-self-end">
+                <!--<img src="/theme/note/login/images/bg_2.jpg" alt="...">-->
+                <br><br><br>
+                <h4 class="text-white">天空一无所有，为何给我安慰？</h4>
+                <p class="text-white">人类的努力应该是没有边界的，我们千差万别，不管生活看上去有多糟糕，总有你能够做的事情，并且能够成功。有生命的地方，就有希望。</p>
+                <br><br>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-6 col-lg-5 col-xl-4 align-self-center">
+        <div class="px-80 py-30">
+            <h4>开始登录</h4>
+            <p><small>输入账号信息登录</small></p>
+            <br>
+
+            <form class="form-type-material" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="username" name="username">
+                    <label for="username">用户名或邮箱</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password">
+                    <label for="password">用户密码</label>
+                </div>
+
+                <div class="form-group flexbox">
+                    <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" checked>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">记住账号密码</span>
+                    </label>
+
+                    <a class="text-muted hover-primary fs-13" href="/admin/login/forgetpassword" target="_blank">忘记密码?</a>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-bold btn-block btn-primary" type="submit">开始登陆</button>
+                </div>
+            </form>
+
+            <hr class="w-30px">
+
+            <p class="text-center text-muted fs-13 mt-20">还没有账号吗? <a class="text-primary fw-500" href="/admin/login/register">开始注册</a></p>
+        </div>
+    </div>
+</div>
+<?php include VIEW_PATH.'login/footer.html'; ?>

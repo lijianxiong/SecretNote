@@ -1,0 +1,27 @@
+<?php include VIEW_PATH.'template/header.html'; ?>
+<?php include VIEW_PATH.'template/sidebar.html'; ?>
+<div class="span9">
+    <div class="content">
+        <div class="module">
+            <div class="module-head">
+                <h3>预览创作</h3>
+            </div>
+            <div class="module-body">
+                <section class="docs">
+                    <h2><?=$article['title']?></h2>
+                    <div class="article-title">
+                        <p>
+                            <span class="create-time">发布时间：<?=$article['create_time']?></span> / <span><?=$category[$article['category_id']]?></span> / <span class="article-update"><a
+                                href="/admin/article/edit/<?=$article['id'];?>" target="_blank">修改</a></span>
+                        </p>
+                    </div>
+                    <div class="article-body">
+                        <?=$article['content']?>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!--/.content-->
+</div>
+<?php include VIEW_PATH.'template/footer.html'; ?>

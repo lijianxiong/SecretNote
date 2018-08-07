@@ -1,0 +1,51 @@
+<?php include VIEW_PATH.'login/header.html'; ?>
+
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="module module-login span4 offset4">
+<form class="form-vertical" action="/admin/login/register" method="post">
+    <div class="module-head">
+        <h3>开始注册</h3>
+    </div>
+    <div class="module-body">
+        <div class="control-group">
+            <div class="controls row-fluid">
+                <input name="code" class="span9" type="text" id="code" placeholder="邀请码">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls row-fluid">
+                <input name="email" class="span12" type="text" id="email" placeholder="邮箱地址" onchange="checkemail();">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls row-fluid">
+                <input name="password" class="span12" type="password" id="password" placeholder="用户密码">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls row-fluid">
+                <input name="repassword" class="span12" type="password" id="repassword" placeholder="重复用户密码">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls row-fluid">
+                <a href="/admin/login">已有账号，登入</a>
+            </div>
+        </div>
+    </div>
+    <div class="module-foot">
+        <div class="control-group">
+            <div class="controls clearfix">
+                <button type="submit" class="btn btn-primary pull-right validate">开始注册</button>
+            </div>
+        </div>
+    </div>
+</form>
+            </div>
+        </div>
+    </div>
+</div><!--/.wrapper-->
+<script src="/theme/admin/scripts/register.js"></script>
+<?php include VIEW_PATH.'login/footer.html'; ?>
